@@ -1,6 +1,6 @@
 # Overview
 
-A `rabbitmqadmin` docker image for administration of `RabbitMQ`.
+A docker image for administration of `RabbitMQ` (using `rabbitmqadmin`)
 
 The container contains the following:
 
@@ -46,7 +46,9 @@ docker run vtchrispeterson/rabbitmqadmin list queues
 #### Export Configuration
 
 ```sh
-docker run -e RABBIT_HOST=rabbitmqserver -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd vtchrispeterson/rabbitmqadmin export cand_config.json
+docker run -e RABBIT_HOST=rabbitmqserver \
+   -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
+   vtchrispeterson/rabbitmqadmin export config.json
 ```
 
 ## Local Development
