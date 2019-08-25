@@ -7,6 +7,11 @@ build: Dockerfile
 
 help:
 	@docker run --rm \
-		--name test-rabbitmqadmin \
+		--name rabbitmqadmin-help \
 		vtchrispeterson/rabbitmqadmin:local \
 		--help
+
+interactive:
+	@docker run --rm -it --entrypoint bin/sh \
+		--name rabbitmqadmin-interactive \
+		vtchrispeterson/rabbitmqadmin:local
