@@ -38,18 +38,28 @@ A few environment variables can be provided:
 
 Here are some common examples for how you might use the container:
 
-#### List Queues
+#### Example: List Queues
 
 ```sh
-docker run vtchrispeterson/rabbitmqadmin list queues
+run -e RABBIT_HOST=rabbitmqserver \
+   -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
+   vtchrispeterson/rabbitmqadmin list queues
 ```
 
-#### Export Configuration
+#### Example: Export Configuration
 
 ```sh
 docker run -e RABBIT_HOST=rabbitmqserver \
    -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
    vtchrispeterson/rabbitmqadmin export config.json
+```
+
+#### Example: Show Overview
+
+```sh
+run -e RABBIT_HOST=rabbitmqserver \
+   -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
+   vtchrispeterson/rabbitmqadmin show overview --format=pretty_json
 ```
 
 ## Local Development
