@@ -1,47 +1,65 @@
-# docker-rabbitmqadmin
+# Overview
 
 A `rabbitmqadmin` docker image for administration of `RabbitMQ`.
 
 The container contains the following:
+
 * [`rabbitmqadmin`](https://www.rabbitmq.com/management-cli.html) (Based on latest `RabbitMQ 3.7.17`)
 
 ## Images
+
 * `latest` ([Dockerfile](./Dockerfile))
 
 ## Usage
-Pull the docker image from Docker hub as:
+
+Pull the docker image from *Docker Hub*:
+
+```sh
+docker pull vtchrispeterson/rabbitmqadmin
 ```
-$ docker pull vtchrispeterson/rabbitmqadmin
-```
-By default, this will pull the latest image.
 
-The entrypoint of this Docker image is `rabbitmqadmin`
-which can be used by automated job schedulers directly.
+By default, this will pull the `latest` tag.
+_In the future, additional tags may be used to allow clients to pin to specific functionality_
 
-A few environment variables can be provided to connect to
-the broker as:
+The entrypoint of this Docker image is `rabbitmqadmin`.
 
-* `RABBIT_HOST`: reachable IP or FQDN of the broker (default: `127.0.0.1`)
+### Environment Variables
+
+A few environment variables can be providedß:
+
+* `RABBIT_HOST`: IP or FQDN of the broker (default: `127.0.0.1`)
 * `RABBIT_PORT`: port to access RabbitMQ at (default: `15672`)
 * `RABBIT_USER`: username of the broker account (default: `guest`)
 * `RABBIT_PASSWORD`: associated password (default: `guest`)
 * `RABBIT_VHOST`: RabbitMQ virtual host (default: `/`)
 
-A sample execution:
-```
-$ docker run --rm vtchrispeterson/rabbitmqadmin:latest list queues
+### Examples
+
+Here are some common examples for how you might use the container:
+
+#### List Queues
+
+```sh
+docker run vtchrispeterson/rabbitmqadmin list queues
 ```
 
-In other cases the entrypoint can be overriden as:
+#### Export Configuration
 
+```sh
+docker run -e RABBIT_HOST=rabbitmqserver -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd vtchrispeterson/rabbitmqadmin export cand_config.json
 ```
-$ docker run --rm -it --entrypoint sh vtchrispeterson/rabbitmqadmin:latest
-```
 
-This will open up the `sh` shell.
+## Local Development
 
-## Build
 To build the latest image from source, run
+
+```sh
+make
 ```
-$ make latest
+
+To get a list of commands supported by `rabbitmqadmin`, consult [documentation](https://www.rabbitmq.com/management-cli.html),
+or run
+
+```sh
+make help
 ```

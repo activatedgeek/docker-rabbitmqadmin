@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine
 
 MAINTAINER Chris Peterson "vtchrispeterson@gmail.com"
 

@@ -1,12 +1,12 @@
 ##
-# Makefile for development environments
+# Makefile for local development
 ##
 
-latest: Dockerfile
-	@docker build -t vtchrispeterson/rabbitmqadmin:devel .
+build: Dockerfile
+	@docker build -t vtchrispeterson/rabbitmqadmin:local .
 
-run:
+help:
 	@docker run --rm \
 		--name test-rabbitmqadmin \
-		vtchrispeterson/rabbitmqadmin:devel \
-		--version
+		vtchrispeterson/rabbitmqadmin:local \
+		--help
