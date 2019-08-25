@@ -1,20 +1,17 @@
 # docker-rabbitmqadmin
 
-| [![Build Status](https://travis-ci.org/activatedgeek/docker-rabbitmqadmin.svg?branch=master)](https://travis-ci.org/activatedgeek/docker-rabbitmqadmin) | [![](https://imagelayers.io/badge/activatedgeek/rabbitmqadmin:latest.svg)](https://imagelayers.io/?images=activatedgeek/rabbitmqadmin:latest 'Get your own badge on imagelayers.io') |
-|:-:|:-:|
-
 A `rabbitmqadmin` docker image for administration of `RabbitMQ`.
 
 The container contains the following:
-* [`rabbitmqadmin`](https://www.rabbitmq.com/management-cli.html) (Based on latest `RabbitMQ 3.6`)
+* [`rabbitmqadmin`](https://www.rabbitmq.com/management-cli.html) (Based on latest `RabbitMQ 3.7.17`)
 
 ## Images
-* `latest`, `0.1`, `0.1.0` ([Dockerfile](./Dockerfile))
+* `latest` ([Dockerfile](./Dockerfile))
 
 ## Usage
 Pull the docker image from Docker hub as:
 ```
-$ docker pull activatedgeek/rabbitmqadmin
+$ docker pull vtchrispeterson/rabbitmqadmin
 ```
 By default, this will pull the latest image.
 
@@ -32,13 +29,13 @@ the broker as:
 
 A sample execution:
 ```
-$ docker run --rm activatedgeek/rabbitmqadmin:latest list queues
+$ docker run --rm vtchrispeterson/rabbitmqadmin:latest list queues
 ```
 
 In other cases the entrypoint can be overriden as:
 
 ```
-$ docker run --rm -it --entrypoint sh activatedgeek/rabbitmqadmin:latest
+$ docker run --rm -it --entrypoint sh vtchrispeterson/rabbitmqadmin:latest
 ```
 
 This will open up the `sh` shell.

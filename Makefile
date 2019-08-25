@@ -3,10 +3,10 @@
 ##
 
 latest: Dockerfile
-	@docker build -t activatedgeek/rabbitmqadmin:devel .
+	@docker build -t vtchrispeterson/rabbitmqadmin:devel .
 
 run:
 	@docker run --rm \
 		--name test-rabbitmqadmin \
-		activatedgeek/rabbitmqadmin:devel \
+		vtchrispeterson/rabbitmqadmin:devel \
 		--version
