@@ -6,9 +6,11 @@ The container contains the following:
 
 * [`rabbitmqadmin`](https://www.rabbitmq.com/management-cli.html) (Based on latest `RabbitMQ 3.7.17`)
 
-## Images
+## [Tags](https://hub.docker.com/r/vtchrispeterson/rabbitmqadmin/tags)
 
-* `latest` ([Dockerfile](./Dockerfile))
+* `latest`
+
+_In the future, additional tags may be used to allow clients to pin to specific functionality_
 
 ## Usage
 
@@ -19,13 +21,12 @@ docker pull vtchrispeterson/rabbitmqadmin
 ```
 
 By default, this will pull the `latest` tag.
-_In the future, additional tags may be used to allow clients to pin to specific functionality_
 
 The entrypoint of this Docker image is `rabbitmqadmin`.
 
 ### Environment Variables
 
-A few environment variables can be providedß:
+A few environment variables can be provided:
 
 * `RABBIT_HOST`: IP or FQDN of the broker (default: `127.0.0.1`)
 * `RABBIT_PORT`: port to access RabbitMQ at (default: `15672`)
