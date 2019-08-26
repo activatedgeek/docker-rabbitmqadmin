@@ -24,7 +24,7 @@ docker pull vtchrispeterson/rabbitmqadmin
 
 By default, this will pull the `latest` tag.
 
-The default `CMD` is `rmqa` which invokes `rabbitmqadmin` honoring [environment varibles](#EnvironmentVariables).
+The default `CMD` is `rmqa` which invokes `rabbitmqadmin` honoring [environment varibles](#environment-variables).
 
 ### Environment Variables
 
