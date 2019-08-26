@@ -1,7 +1,3 @@
-##
-# Makefile for local development
-##
-
 build: Dockerfile
 	@docker build -t vtchrispeterson/rabbitmqadmin:local .
 

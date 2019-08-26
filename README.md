@@ -5,6 +5,8 @@ A docker image for administration of `RabbitMQ` (using `rabbitmqadmin`)
 The container contains the following:
 
 * [`rabbitmqadmin`](https://www.rabbitmq.com/management-cli.html) (Based on latest `RabbitMQ 3.7.17`)
+* [jq](https://stedolan.github.io/jq/) - command line JSON processor
+* [python](https://www.python.org/) - needed to support `rabbitmqadmin`
 
 ## [Tags](https://hub.docker.com/r/vtchrispeterson/rabbitmqadmin/tags)
 
@@ -14,7 +16,7 @@ _In the future, additional tags may be used to allow clients to pin to specific 
 
 ## Usage
 
-Pull the docker image from *Docker Hub*:
+Pull the docker image from _Docker Hub_:
 
 ```sh
 docker pull vtchrispeterson/rabbitmqadmin
@@ -22,27 +24,29 @@ docker pull vtchrispeterson/rabbitmqadmin
 
 By default, this will pull the `latest` tag.
 
-The default `CMD` is `rmqa` which is short for `rabbitmqadmin` honoring the environment varibles below
+The default `CMD` is `rmqa` which invokes `rabbitmqadmin` honoring [environment varibles](#EnvironmentVariables).
 
 ### Environment Variables
 
 A few environment variables can be provided:
 
-* `RABBIT_HOST`: IP or FQDN of the broker (default: `127.0.0.1`)
-* `RABBIT_PORT`: port to access RabbitMQ at (default: `15672`)
-* `RABBIT_USER`: username of the broker account (default: `guest`)
-* `RABBIT_PASSWORD`: associated password (default: `guest`)
+| name | default | description |
+| --- | --- | --- |
+| `RABBIT_HOST` | `127.0.0.1` | IP or FQDN of the RabbitMQ server |
+| `RABBIT_PORT` | `15672` | Management port of the RabbitMQ server |
+| `RABBIT_USER` | `guest` | Administrator username |
+| `RABBIT_PASSWORD` | `guest` | Administrator password |
 
 ### Examples
 
-Here are some common examples for how you might use the container:
+The following are some common examples for how you might use the container.
 
 #### Example: List Queues
 
 ```sh
 docker run -e RABBIT_HOST=rabbitmqserver \
    -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
-   vtchrispeterson/rabbitmqadmin list queues
+   vtchrispeterson/rabbitmqadmin rmqa list queues
 ```
 
 #### Example: Export Configuration
@@ -50,7 +54,7 @@ docker run -e RABBIT_HOST=rabbitmqserver \
 ```sh
 docker run -e RABBIT_HOST=rabbitmqserver \
    -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
-   vtchrispeterson/rabbitmqadmin export config.json
+   vtchrispeterson/rabbitmqadmin rmqa export config.json
 ```
 
 #### Example: Show Overview
@@ -58,7 +62,7 @@ docker run -e RABBIT_HOST=rabbitmqserver \
 ```sh
 docker run -e RABBIT_HOST=rabbitmqserver \
    -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
-   vtchrispeterson/rabbitmqadmin show overview --format=pretty_json
+   vtchrispeterson/rabbitmqadmin rmqa show overview --format=pretty_json
 ```
 
 #### Example: GitLab CI
@@ -77,10 +81,10 @@ variables:
 
 .snapshot:
   stage: snapshot
-  script: rmqa export config.json
+  script: rmqa export $RABBIT_HOST.config
   artifacts:
     paths:
-    - config.json
+    - $RABBIT_HOST.config
     expire_in: 1 week
 
 .deploy:
@@ -90,7 +94,7 @@ variables:
 
 .rollback:
   stage: rollback
-  script: rmqa import config.json
+  script: rmqa import $RABBIT_HOST.config
   when: manual
 
 snapshot:test:
@@ -128,20 +132,19 @@ rollback:production:
   environment: production
   variables:
     RABBIT_HOST: production-rabbitmqserver
-
 ```
 
 ## Local Development
 
-To build the latest image from source, run
-
-```sh
-make
-```
+To build the latest image from source, run `make`
 
 To get a list of commands supported by `rabbitmqadmin`, consult [documentation](https://www.rabbitmq.com/management-cli.html),
-or run
+or run `make help`.
+
+To test out the container in interactive mode, `make interactive`.
+
+For testing, consider running RabbitMQ locally:
 
 ```sh
-make help
+docker run -p 15672:15672 rabbitmq:3.7.17-management
 ```

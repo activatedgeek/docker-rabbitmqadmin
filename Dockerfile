@@ -10,6 +10,7 @@ RUN apk update &&\
   chmod +x /usr/bin/rabbitmqadmin &&\
   chmod +x /usr/bin/rmqa
 
+# default configuration
 ENV RABBIT_HOST=127.0.0.1 \
   RABBIT_PORT=15672 \
   RABBIT_USER=guest \
