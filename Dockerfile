@@ -13,7 +13,6 @@ RUN apk update &&\
 ENV RABBIT_HOST=127.0.0.1 \
   RABBIT_PORT=15672 \
   RABBIT_USER=guest \
-  RABBIT_PASSWORD=guest \
-  RABBIT_VHOST=/
+  RABBIT_PASSWORD=guest
 
 CMD ["rmqa"]

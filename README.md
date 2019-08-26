@@ -32,7 +32,6 @@ A few environment variables can be provided:
 * `RABBIT_PORT`: port to access RabbitMQ at (default: `15672`)
 * `RABBIT_USER`: username of the broker account (default: `guest`)
 * `RABBIT_PASSWORD`: associated password (default: `guest`)
-* `RABBIT_VHOST`: RabbitMQ virtual host (default: `/`)
 
 ### Examples
 
