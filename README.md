@@ -22,7 +22,7 @@ docker pull vtchrispeterson/rabbitmqadmin
 
 By default, this will pull the `latest` tag.
 
-The entrypoint of this Docker image is `rabbitmqadmin`.
+The default `CMD` is `rmqa` which is short for `rabbitmqadmin` honoring the environment varibles below
 
 ### Environment Variables
 

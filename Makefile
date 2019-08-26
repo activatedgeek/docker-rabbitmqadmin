@@ -12,6 +12,7 @@ help:
 		--help
 
 interactive:
-	@docker run --rm -it --entrypoint bin/sh \
+	@docker run --rm -it \
 		--name rabbitmqadmin-interactive \
-		vtchrispeterson/rabbitmqadmin:local
+		vtchrispeterson/rabbitmqadmin:local \
+		/bin/sh
