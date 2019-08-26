@@ -40,7 +40,7 @@ Here are some common examples for how you might use the container:
 #### Example: List Queues
 
 ```sh
-run -e RABBIT_HOST=rabbitmqserver \
+docker run -e RABBIT_HOST=rabbitmqserver \
    -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
    vtchrispeterson/rabbitmqadmin list queues
 ```
@@ -56,9 +56,79 @@ docker run -e RABBIT_HOST=rabbitmqserver \
 #### Example: Show Overview
 
 ```sh
-run -e RABBIT_HOST=rabbitmqserver \
+docker run -e RABBIT_HOST=rabbitmqserver \
    -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
    vtchrispeterson/rabbitmqadmin show overview --format=pretty_json
+```
+
+#### Example: GitLab CI
+
+```yml
+stages:
+- snapshot
+- deploy
+- rollback
+
+image: vtchrispeterson/rabbitmqadmin
+
+variables:
+  RABBIT_USER: admin
+  RABBIT_PASSWORD: p@ssw0rd
+
+.snapshot:
+  stage: snapshot
+  script: rmqa export config.json
+  artifacts:
+    paths:
+    - config.json
+    expire_in: 1 week
+
+.deploy:
+  stage: deploy
+  script: scripts/deploy.sh
+  when: manual
+
+.rollback:
+  stage: rollback
+  script: rmqa import config.json
+  when: manual
+
+snapshot:test:
+  extends: .snapshot
+  environment: test
+  variables:
+    RABBIT_HOST: test-rabbitmqserver
+
+deploy:test:
+  extends: .deploy
+  environment: test
+  variables:
+    RABBIT_HOST: test-rabbitmqserver
+
+rollback:test:
+  extends: .rollback
+  environment: test
+  variables:
+    RABBIT_HOST: test-rabbitmqserver
+
+snapshot:production:
+  extends: .snapshot
+  environment: production
+  variables:
+    RABBIT_HOST: production-rabbitmqserver
+
+deploy:production:
+  extends: .deploy
+  environment: production
+  variables:
+    RABBIT_HOST: production-rabbitmqserver
+
+rollback:production:
+  extends: .rollback
+  environment: production
+  variables:
+    RABBIT_HOST: production-rabbitmqserver
+
 ```
 
 ## Local Development
