@@ -36,6 +36,7 @@ A few environment variables can be provided:
 | `RABBIT_PORT` | `15672` | Management port of the RabbitMQ server |
 | `RABBIT_USER` | `guest` | Administrator username |
 | `RABBIT_PASSWORD` | `guest` | Administrator password |
+| `RABBIT_ECHO` | `<unset>` (disabled) | If set, commands are echoed to console |
 
 ### Examples
 

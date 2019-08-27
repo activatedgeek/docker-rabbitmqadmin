@@ -16,4 +16,4 @@ ENV RABBIT_HOST=127.0.0.1 \
   RABBIT_USER=guest \
   RABBIT_PASSWORD=guest
 
-CMD ["rmqa"]
+CMD ["rmqa", "show overview"]

@@ -1,3 +1,6 @@
 #!/usr/bin/env sh
+if [ -n  "${RABBIT_ECHO+1}" ]; then
+  echo "'$@' against $RABBIT_HOST:$RABBIT_PORT:"
+fi
 
 /usr/bin/rabbitmqadmin -H $RABBIT_HOST -P $RABBIT_PORT -u $RABBIT_USER -p $RABBIT_PASSWORD $@
