@@ -1,30 +1,15 @@
 # Overview
 
-A docker image for administration of `RabbitMQ` (using `rabbitmqadmin`)
+A docker image for administration of `RabbitMQ` (using `rabbitmqadmin` and/or `rabbitmqctl`)
 
 The container contains the following:
 
-* [rabbitmqadmin](https://www.rabbitmq.com/management-cli.html) (based on _RabbitMQ 3.7.17_)
+* [rabbitmqadmin](https://www.rabbitmq.com/management-cli.html) (based on _RabbitMQ 3.8.*_)
+* [rabbitmqctl](https://www.rabbitmq.com/rabbitmqctl.8.html)
 * [jq](https://stedolan.github.io/jq/) - command line JSON processor
 * [python](https://www.python.org/) - needed to support `rabbitmqadmin`
 
-## [Tags](https://hub.docker.com/r/vtchrispeterson/rabbitmqadmin/tags)
-
-* `latest`
-
-_In the future, additional tags may be used to allow clients to pin to specific functionality_
-
-## Usage
-
-Pull the docker image from _Docker Hub_:
-
-```sh
-docker pull vtchrispeterson/rabbitmqadmin
-```
-
-By default, this will pull the `latest` tag.
-
-The default `CMD` is `rmqa` which invokes `rabbitmqadmin` honoring [environment varibles](#environment-variables).
+The default `CMD` is `rmq` which invokes `rabbitmqctl` honoring [environment varibles](#environment-variables).
 
 ### Environment Variables
 
@@ -133,19 +118,4 @@ rollback:production:
   environment: production
   variables:
     RABBIT_HOST: production-rabbitmqserver
-```
-
-## Local Development
-
-To build the latest image from source, run `make`
-
-To get a list of commands supported by `rabbitmqadmin`, consult [documentation](https://www.rabbitmq.com/management-cli.html),
-or run `make help`.
-
-To test out the container in interactive mode, `make interactive`.
-
-For testing, consider running RabbitMQ locally:
-
-```sh
-docker run -p 15672:15672 rabbitmq:3.7.17-management
 ```
