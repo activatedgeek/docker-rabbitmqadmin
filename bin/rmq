@@ -3,4 +3,8 @@ if [ -n  "${RABBIT_ECHO+1}" ]; then
   echo "'$@' against $RABBIT_HOST:$RABBIT_PORT:"
 fi
 
-rabbitmqctl --node "rabbit@$RABBIT_HOST" --longnames --erlang-cookie $RABBIT_ERLANG_COOKIE  $@
+if [ -n "${RABBIT_ERLANG_COOKIE+1}" ]; then
+  echo $RABBIT_ERLANG_COOKIE > $HOME/.erlang.cookie
+fi
+
+rabbitmqctl --node "rabbit@$RABBIT_HOST" --longnames $@
