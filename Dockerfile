@@ -1,14 +1,13 @@
-FROM alpine
+FROM rabbitmq:3-management
 
-MAINTAINER Chris Peterson "vtchrispeterson@gmail.com"
+LABEL maintainer="vtchrispeterson@gmail.com"
 
 ADD bin/* /usr/bin/
 
-RUN apk update &&\
-  apk add --update curl python jq &&\
-  curl https://raw.githubusercontent.com/rabbitmq/rabbitmq-management/v3.7.17/bin/rabbitmqadmin -o /usr/bin/rabbitmqadmin &&\
-  chmod +x /usr/bin/rabbitmqadmin &&\
-  chmod +x /usr/bin/rmqa
+RUN apt-get update; \
+  apt-get install -y curl jq
+
+RUN chmod +x /usr/bin/rmq*
 
 # default configuration
 ENV RABBIT_HOST=127.0.0.1 \
@@ -16,4 +15,4 @@ ENV RABBIT_HOST=127.0.0.1 \
   RABBIT_USER=guest \
   RABBIT_PASSWORD=guest
 
-CMD ["rmqa", "show overview"]
+CMD ["rmq", "help"]
