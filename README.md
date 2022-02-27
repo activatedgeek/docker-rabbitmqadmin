@@ -4,7 +4,7 @@ A docker image for administration of `RabbitMQ` (using `rabbitmqadmin` and/or `r
 
 The container contains the following:
 
-* [rabbitmqadmin](https://www.rabbitmq.com/management-cli.html) (based on _RabbitMQ 3.8.*_)
+* [rabbitmqadmin](https://www.rabbitmq.com/management-cli.html) (based on _RabbitMQ 3.9.*_)
 * [rabbitmqctl](https://www.rabbitmq.com/rabbitmqctl.8.html)
 * [jq](https://stedolan.github.io/jq/) - command line JSON processor
 * [python](https://www.python.org/) - needed to support `rabbitmqadmin`
@@ -32,7 +32,7 @@ The following are some common examples for how you might use the container.
 ```sh
 docker run -e RABBIT_HOST=rabbitmqserver \
    -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
-   vtchrispeterson/rabbitmqadmin rmqa list queues
+   ghcr.io/chris-peterson/rmq-cli/rmq-cli rmqa list queues
 ```
 
 #### Example: Export Configuration
@@ -40,7 +40,7 @@ docker run -e RABBIT_HOST=rabbitmqserver \
 ```sh
 docker run -e RABBIT_HOST=rabbitmqserver \
    -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
-   vtchrispeterson/rabbitmqadmin rmqa export config.json
+   ghcr.io/chris-peterson/rmq-cli/rmq-cli rmqa export config.json
 ```
 
 #### Example: Show Overview
@@ -48,7 +48,7 @@ docker run -e RABBIT_HOST=rabbitmqserver \
 ```sh
 docker run -e RABBIT_HOST=rabbitmqserver \
    -e RABBIT_USER=admin -e RABBIT_PASSWORD=p@ssw0rd \
-   vtchrispeterson/rabbitmqadmin rmqa show overview --format=pretty_json
+   ghcr.io/chris-peterson/rmq-cli/rmq-cli rmqa show overview --format=pretty_json
 ```
 
 #### Example: GitLab CI
@@ -59,7 +59,7 @@ stages:
 - deploy
 - rollback
 
-image: vtchrispeterson/rabbitmqadmin
+image: ghcr.io/chris-peterson/rmq-cli/rmq-cli
 
 variables:
   RABBIT_USER: admin

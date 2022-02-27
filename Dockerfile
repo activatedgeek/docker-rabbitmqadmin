@@ -1,6 +1,6 @@
-FROM rabbitmq:3-management
+FROM rabbitmq:3.9.13-management
 
-LABEL maintainer="vtchrispeterson@gmail.com"
+LABEL maintainer="chrispeterson@fastmail.com"
 
 ADD bin/* /usr/bin/
 
