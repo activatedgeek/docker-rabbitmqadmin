@@ -17,7 +17,6 @@ A few environment variables can be provided:
 
 | name | default | description |
 | --- | --- | --- |
-| `RABBIT_ECHO` | `<unset>` (disabled) | If set, commands are echoed to console |
 | `RABBIT_HOST` | `127.0.0.1` | IP or FQDN of the RabbitMQ server |
 | `RABBIT_PORT` | `15672` | Management port of the RabbitMQ server |
 | `RABBIT_USER`/`RABBIT_PASSWORD` | `guest` | Administrator username/password (used by rmqa)|
