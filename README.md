@@ -4,7 +4,7 @@ A docker image for administration of `RabbitMQ` (using `rabbitmqadmin` and/or `r
 
 The container contains the following:
 
-* [rabbitmqadmin](https://www.rabbitmq.com/management-cli.html) (based on _RabbitMQ 3.9.*_)
+* [rabbitmqadmin](https://www.rabbitmq.com/management-cli.html)
 * [rabbitmqctl](https://www.rabbitmq.com/rabbitmqctl.8.html)
 * [jq](https://stedolan.github.io/jq/) - command line JSON processor
 * [python](https://www.python.org/) - needed to support `rabbitmqadmin`
